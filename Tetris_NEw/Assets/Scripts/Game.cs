@@ -26,6 +26,8 @@ public class Game : MonoBehaviour
 
     [SerializeField] private int currentScore = 0;//очки игрока
     public int CurrentScore => currentScore;
+    [SerializeField] private bool gameOver=false;
+    public bool Gameover => gameOver;
 
     [SerializeField] private int individualScore = 100;//бонусные очки которые начисляются  если быстро опустить фигуры вниз
     private float individualScoreTime;// таймер для бонусных очков
@@ -342,7 +344,10 @@ public class Game : MonoBehaviour
     }
     public void GameOver()// окончание игры, вызов сцены с результатами 
     {
-        SceneManager.LoadScene("GameOver");
+        gameOver = true;
+        FindObjectOfType<GlobalScore>().InsertScore();
+        FindObjectOfType<SceneSwap>().UpdateScene();
+        //SceneManager.LoadScene("GameOver");
         
     }
 }

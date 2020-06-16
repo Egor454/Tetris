@@ -5,13 +5,10 @@ using UnityEngine;
 public class Tetromino : MonoBehaviour
 {
     private float fall = 0;//таймер обратного отсчета для скорости падения
-    //public int currentScore;
+
     private float fallSpeed;// скорость падения 
     private bool allowRotation = true;// переменная которая позволяет вращать фигуру 
     private bool limitRotation = false;//переменная для ограничения вращения фигуры,для некторых фигур ограниченно вращение 90 и -90
-    // public string prefabName;
-    //public int individualScore = 100;//бонусные очки которые начисляются  если быстро опустить фигуры вниз
-    //private float individualScoreTime;// таймер для бонусных очков
 
     [SerializeField] private float continuousVerticalSpeed = 0.05f;//скорость фигуры если нажать и удерживать кнопку вниз
     [SerializeField] private  float continuousHorizontalSpeed = 0.1f;//скорость фигуры если нажать и удерживать кнопку влево или вправо
@@ -37,18 +34,7 @@ public class Tetromino : MonoBehaviour
         CheckUserInput();
         //UpdateIndividualScore();
     }
-    //void UpdateIndividualScore()//присвоение бонусных очков, чем дольше падает фигура тем меньше бонусных очков 
-    //{
-    //    if (individualScoreTime < 1)
-    //    {
-    //        individualScoreTime += Time.deltaTime;
-    //    }
-    //    else
-    //    {
-    //        individualScoreTime = 0;
-    //        individualScore = Mathf.Max(individualScore - 10, 0);
-    //    }
-    //}
+
 
     void CheckUserInput()//регестрация всех нажатий пользователя на клавиатуру для упраления фигурой 
     {

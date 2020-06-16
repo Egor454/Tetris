@@ -24,8 +24,8 @@ public class MenuSystem : MonoBehaviour
     }
     public void Endscore()//функция вывода конечных результатов на экран
     {
-        scoreEnd = GameObject.Find("GameScriptEnd").GetComponent<Game>().CurrentScore;
-        lineEnd = GameObject.Find("GameScriptEnd").GetComponent<Game>().NumLineCleared;
+        scoreEnd = GameObject.Find("ScoreEnd").GetComponent<GlobalScore>().ScoreEnd;
+        lineEnd = GameObject.Find("ScoreEnd").GetComponent<GlobalScore>().LineEnd;
         hud_scoreend.text = scoreEnd.ToString();
         hud_linesend.text = lineEnd.ToString();
     }
