@@ -6,26 +6,38 @@ using UnityEngine.UI;
 
 public class Game : MonoBehaviour
 {
-    public static int gridWidth = 10;// ширина поле игры
-    public static int gridHeight = 20;//высота поля игры
-    public static Transform[,] grid = new Transform[gridWidth, gridHeight];// обновленное поле игры,с учетом наличие на ней фигур 
+   private  int gridWidth = 10;// ширина поле игры
+   private int gridHeight = 20;//высота поля игры
+   private Transform[,] grid;// обновленное поле игры,с учетом наличие на ней фигур 
 
-    public int scoreOneLine = 60;//очки которые прибавляются за 1 собранную линию
-    public int scoreTwoLine = 120;//очки которые прибавляются за 2 собранную линию
-    public int scoreThreeLine = 320;//очки которые прибавляются за 3 собранную линию
-    public int scoreFourLine = 1400;//очки которые прибавляются за 4 собранную линию
-    public  float fallSpeed=1.0f;//скорость падения фигур вниз
-    public Text hud_score;//поле для вывода очков
-    public Text hud_speed;//поле для вывода скорости
-    public Text hud_lines;//поле для вывода линий заполненных
-    private static int numberOfRowsThisTurn=0;//количество заполненных линий одновременно 
-    public static int currentScore = 0;//очки игрока
-    public  float currentLevel = 0;// уровень игры который меняет скорость падения фигур ,в зависимости от количества заполненных линий
-    public static float numLineCleared=0;// количество заполненных линий всего
+    [SerializeField] private int scoreOneLine = 60;//очки которые прибавляются за 1 собранную линию
+    [SerializeField] private int scoreTwoLine = 120;//очки которые прибавляются за 2 собранную линию
+    [SerializeField] private int scoreThreeLine = 320;//очки которые прибавляются за 3 собранную линию
+    [SerializeField] private int scoreFourLine = 1400;//очки которые прибавляются за 4 собранную линию
 
-    private static GameObject previewTetromino;// показывает следующую фигуру 
-    private static GameObject nextTetromino;// фигура которая появляется для управления
-    public static bool gameStarted = false;// началась игра или нет
+    [SerializeField] private float fallSpeed=1.0f;//скорость падения фигур вниз
+    public float FallSpeed => fallSpeed;
+
+    [SerializeField]  private Text hud_score;//поле для вывода очков
+    [SerializeField]  private Text hud_speed;//поле для вывода скорости
+    [SerializeField]  private Text hud_lines;//поле для вывода линий заполненных
+
+    private  int numberOfRowsThisTurn=0;//количество заполненных линий одновременно 
+
+    [SerializeField] private int currentScore = 0;//очки игрока
+    public int CurrentScore => currentScore;
+
+    [SerializeField] private int individualScore = 100;//бонусные очки которые начисляются  если быстро опустить фигуры вниз
+    private float individualScoreTime;// таймер для бонусных очков
+
+    private float currentLevel = 0;// уровень игры который меняет скорость падения фигур ,в зависимости от количества заполненных линий
+    [SerializeField] private float numLineCleared=0;// количество заполненных линий всего
+    public float NumLineCleared => numLineCleared;
+
+    private  GameObject previewTetromino;// показывает следующую фигуру 
+    private  GameObject nextTetromino;// фигура которая появляется для управления
+
+    private  bool gameStarted = false;// началась игра или нет
 
     private Vector2 previewTetrominoPosition = new Vector2(15.0f, 15);// расположение следующей фигуры на экране
 
@@ -98,8 +110,22 @@ public class Game : MonoBehaviour
         hud_score.text = currentScore.ToString();
         hud_lines.text = numLineCleared.ToString();
     }
+    public void UpdateIndividualScore()//присвоение бонусных очков, чем дольше падает фигура тем меньше бонусных очков 
+    {
+        currentScore += individualScore;
+        individualScore = 100;
+    }
     public void UpdateScore()//функция для обновления очков в зависимости от количества заполненных линий
     {
+        if (individualScoreTime < 1)
+        {
+            individualScoreTime += Time.deltaTime;
+        }
+        else
+        {
+            individualScoreTime = 0;
+            individualScore = Mathf.Max(individualScore - 10, 0);
+        }
         if (numberOfRowsThisTurn > 0)
         {
             if (numberOfRowsThisTurn == 1)
@@ -257,6 +283,9 @@ public class Game : MonoBehaviour
     {
         if (!gameStarted)// если игра только началась, создает фигуру для управления и показывает следующую фигуру
         {
+            grid = new Transform[gridWidth, gridHeight];
+            currentScore = 0;
+            numLineCleared = 0;
             gameStarted = true;
             nextTetromino = (GameObject)Instantiate(Resources.Load(GetRandomTetromino(), typeof(GameObject)), new Vector2(5.0f, 20.0f), Quaternion.identity);
             previewTetromino = (GameObject)Instantiate(Resources.Load(GetRandomTetromino(), typeof(GameObject)), previewTetrominoPosition, Quaternion.identity);

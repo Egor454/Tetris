@@ -128,11 +128,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -7640882676261462814, guid: 8169a1705ed8ec44abbe3b84b0de4386,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1079246341833935370, guid: 8169a1705ed8ec44abbe3b84b0de4386,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -246,7 +241,9 @@ MonoBehaviour:
   hud_score: {fileID: 1724038532}
   hud_speed: {fileID: 699730185}
   hud_lines: {fileID: 701925211}
-  currentLevel: 0
+  currentScore: 0
+  individualScore: 100
+  numLineCleared: 0
 --- !u!1 &510103157
 GameObject:
   m_ObjectHideFlags: 0
