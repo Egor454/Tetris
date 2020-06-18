@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GlobalScore : MonoBehaviour
+public class GlobalScore : GlobalResultManager<GlobalScore>
 {
     [SerializeField] private int scoreEnd;
     public int ScoreEnd=>scoreEnd;
 
     [SerializeField] private float lineEnd;
     public float LineEnd=>lineEnd;
-    public void InsertScore()
+    public void InsertScore(int scoreend, float lineend)
     {
-        scoreEnd = GameObject.Find("GameScript").GetComponent<Game>().CurrentScore;
-        lineEnd = GameObject.Find("GameScript").GetComponent<Game>().NumLineCleared;
+        scoreEnd = scoreend;
+        lineEnd = lineend;
     }
 
 }

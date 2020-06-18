@@ -345,9 +345,8 @@ public class Game : MonoBehaviour
     public void GameOver()// окончание игры, вызов сцены с результатами 
     {
         gameOver = true;
-        FindObjectOfType<GlobalScore>().InsertScore();
+        GlobalScore.Instance.InsertScore(currentScore, numLineCleared);
         FindObjectOfType<SceneSwap>().UpdateScene();
-        //SceneManager.LoadScene("GameOver");
-        
+
     }
 }

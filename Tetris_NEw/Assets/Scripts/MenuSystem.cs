@@ -10,13 +10,9 @@ public class MenuSystem : MonoBehaviour
     [SerializeField] private Text hud_linesend;// поле вывода конечных заполненых линий на экран
     private int scoreEnd;
     private float lineEnd;
-
     public void PlayAgain()//функция которая запускает игру занова
     {
         SceneManager.LoadScene("Level");
-        //scoreEnd = GameObject.Find("GameScriptEnd").GetComponent<Game>().CurrentScore;
-        //lineEnd = GameObject.Find("GameScriptEnd").GetComponent<Game>().NumLineCleared;
-        //Game.gameStarted = false;
     }
      void Update()//функция обновления
     {
@@ -24,10 +20,9 @@ public class MenuSystem : MonoBehaviour
     }
     public void Endscore()//функция вывода конечных результатов на экран
     {
-        scoreEnd = GameObject.Find("ScoreEnd").GetComponent<GlobalScore>().ScoreEnd;
-        lineEnd = GameObject.Find("ScoreEnd").GetComponent<GlobalScore>().LineEnd;
-        hud_scoreend.text = scoreEnd.ToString();
-        hud_linesend.text = lineEnd.ToString();
+
+        hud_scoreend.text = GlobalScore.Instance.ScoreEnd.ToString();
+        hud_linesend.text = GlobalScore.Instance.LineEnd.ToString();
     }
     public void BackMenu()
     {

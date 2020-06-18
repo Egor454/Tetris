@@ -32,7 +32,6 @@ public class Tetromino : MonoBehaviour
     void Update()
     {
         CheckUserInput();
-        //UpdateIndividualScore();
     }
 
 
