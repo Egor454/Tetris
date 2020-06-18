@@ -46,6 +46,7 @@ public class Game : MonoBehaviour
     void Start()// старт игры
     {
         SpawnNextTetromino();
+
     }
 
     //Update is called once per frame
@@ -311,7 +312,6 @@ public class Game : MonoBehaviour
     {
         return new Vector2(Mathf.Round(pos.x), Mathf.Round(pos.y));
     }
-
     string GetRandomTetromino()// рандомное определение следующей фигуры
     {
         int randomTetromino = Random.Range(1, 8);
