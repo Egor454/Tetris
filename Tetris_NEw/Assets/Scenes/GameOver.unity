@@ -345,7 +345,7 @@ GameObject:
   - component: {fileID: 174966189}
   - component: {fileID: 174966188}
   m_Layer: 0
-  m_Name: SceneSwap
+  m_Name: NextScene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

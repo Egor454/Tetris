@@ -15,6 +15,8 @@ public class Game : MonoBehaviour
     [SerializeField] private int scoreThreeLine = 320;//очки которые прибавляются за 3 собранную линию
     [SerializeField] private int scoreFourLine = 1400;//очки которые прибавляются за 4 собранную линию
 
+    [SerializeField] private Transform locationspawn;
+
     [SerializeField] private float fallSpeed=1.0f;//скорость падения фигур вниз
     public float FallSpeed => fallSpeed;
 
@@ -39,9 +41,13 @@ public class Game : MonoBehaviour
     private  GameObject previewTetromino;// показывает следующую фигуру 
     private  GameObject nextTetromino;// фигура которая появляется для управления
 
+    private GameObject previewTwoTetromino;// показывает следующую фигуру 
+    private GameObject nextTwoTetromino;// фигура которая появляется для управления
+
     private  bool gameStarted = false;// началась игра или нет
 
     private Vector2 previewTetrominoPosition = new Vector2(15.0f, 15);// расположение следующей фигуры на экране
+    private Vector2 previewTwoTetrominoPosition = new Vector2(-15.0f, 15);// расположение следующей фигуры на экране
 
     void Start()// старт игры
     {
@@ -290,8 +296,9 @@ public class Game : MonoBehaviour
             currentScore = 0;
             numLineCleared = 0;
             gameStarted = true;
-            nextTetromino = (GameObject)Instantiate(Resources.Load(GetRandomTetromino(), typeof(GameObject)), new Vector2(5.0f, 20.0f), Quaternion.identity);
-            previewTetromino = (GameObject)Instantiate(Resources.Load(GetRandomTetromino(), typeof(GameObject)), previewTetrominoPosition, Quaternion.identity);
+
+            nextTetromino = (GameObject)Instantiate(Resources.Load(GetRandomTetromino(), typeof(GameObject)), new Vector2(5.0f, 20.0f), Quaternion.identity,locationspawn);
+            previewTetromino = (GameObject)Instantiate(Resources.Load(GetRandomTetromino(), typeof(GameObject)), previewTetrominoPosition, Quaternion.identity, locationspawn);
             previewTetromino.GetComponent<Tetromino>().enabled = false;
         }
         else//если игра уже идет, следующую фигуру перемещает под управление игрока и показывает следующую фигуру
@@ -300,8 +307,17 @@ public class Game : MonoBehaviour
             nextTetromino = previewTetromino;
             nextTetromino.GetComponent<Tetromino>().enabled = true;
 
-            previewTetromino = (GameObject)Instantiate(Resources.Load(GetRandomTetromino(), typeof(GameObject)), previewTetrominoPosition, Quaternion.identity);
+            previewTetromino = (GameObject)Instantiate(Resources.Load(GetRandomTetromino(), typeof(GameObject)), previewTetrominoPosition, Quaternion.identity, locationspawn);
             previewTetromino.GetComponent<Tetromino>().enabled = false;
+            //if (GlobalScore.Instance.NumberPlayers == 1)
+            //{
+            //    previewTwoTetromino.transform.position = new Vector2(-25.0f, 20.0f);
+            //    nextTwoTetromino = previewTwoTetromino;
+            //    nextTwoTetromino.GetComponent<Tetromino>().enabled = true;
+
+            //    previewTwoTetromino = (GameObject)Instantiate(Resources.Load(GetRandomTetromino(), typeof(GameObject)), previewTwoTetrominoPosition, Quaternion.identity);
+            //    previewTwoTetromino.GetComponent<Tetromino>().enabled = false;
+            //}
         }
     }
     public bool CheckIsInsideGrid(Vector2 pos)// проверка столкновений с полем

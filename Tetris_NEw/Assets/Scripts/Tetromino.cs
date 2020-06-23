@@ -7,8 +7,8 @@ public class Tetromino : MonoBehaviour
     private float fall = 0;//таймер обратного отсчета для скорости падения
 
     private float fallSpeed;// скорость падения 
-    private bool allowRotation = true;// переменная которая позволяет вращать фигуру 
-    private bool limitRotation = false;//переменная для ограничения вращения фигуры,для некторых фигур ограниченно вращение 90 и -90
+    [SerializeField] private bool allowRotation = true;// переменная которая позволяет вращать фигуру 
+    [SerializeField] private bool limitRotation = false;//переменная для ограничения вращения фигуры,для некторых фигур ограниченно вращение 90 и -90
 
     [SerializeField] private float continuousVerticalSpeed = 0.05f;//скорость фигуры если нажать и удерживать кнопку вниз
     [SerializeField] private  float continuousHorizontalSpeed = 0.1f;//скорость фигуры если нажать и удерживать кнопку влево или вправо
@@ -182,7 +182,6 @@ public class Tetromino : MonoBehaviour
                     FindObjectOfType<Game>().GameOver();// игра окончена
                 }
                 enabled = false;// запрет на управление этой фигурой
-                                //currentScore += individualScore;// прибавляем бонусные очки
                 FindObjectOfType<Game>().UpdateIndividualScore();
                 FindObjectOfType<Game>().SpawnNextTetromino();// создаем следующую фигуру
 
