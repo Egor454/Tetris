@@ -46,7 +46,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 997
-  m_MinSize: {x: 875, y: 542}
+  m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &3
 MonoBehaviour:
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_MinSize: {x: 677, y: 492}
   m_MaxSize: {x: 14001, y: 14042}
   vertical: 0
-  controlID: 35
+  controlID: 57
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_MinSize: {x: 402, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
-  controlID: 36
+  controlID: 103
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_MinSize: {x: 402, y: 221}
   m_MaxSize: {x: 8002, y: 4021}
   vertical: 0
-  controlID: 37
+  controlID: 104
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -395,7 +395,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 4edafeff52dafeff54dafeff0c5bfffffe5dffff025effffac61fffff6a2ffffeea3ffff2ea5ffffc2a6ffff02a8ffff1aedffff6afbffff
+      m_ExpandedIDs: ba52fdffc259fdffd074fdffb6a4fdff56aafdff5aaafdffc4c8fdfff003fffffa03ffffe25cffff245effff2e5effff305effff6c8fffff708fffff728fffff84d0ffff3ee5ffff48e5ffff50e5ffff70ebffff6afbfffff4ffffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -455,9 +455,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 7.821845, y: 10.432556, z: -0.3835875}
+    m_Target: {x: 31.866112, y: 10.236503, z: -2.8247354}
     speed: 2
-    m_Value: {x: 4.722211, y: 2.0635295, z: -34.448494}
+    m_Value: {x: 31.866112, y: 10.236503, z: -2.8247354}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -507,9 +507,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 14.4668
+    m_Target: 20.098093
     speed: 2
-    m_Value: 13.822679
+    m_Value: 20.098093
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -599,20 +599,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/Prefabs
+    - Assets/Resources/Object
   m_ViewMode: 1
   m_StartGridSize: 96
   m_LastFolders:
-  - Assets/Resources/Prefabs
+  - Assets/Resources/Object
   m_LastFoldersGridSize: 96
   m_LastProjectPath: C:\Users\Darkget\Documents\GitHub\Tetris\Tetris_NEw
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 5a390000
-    m_LastClickedID: 14682
-    m_ExpandedIDs: 000000004e3900005039000000ca9a3b
+    m_SelectedIDs: 92390000
+    m_LastClickedID: 14738
+    m_ExpandedIDs: 00000000883900008a39000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -640,7 +640,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000004e39000050390000
+    m_ExpandedIDs: 00000000883900008a390000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -667,7 +667,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000124b000024390000a43d000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0

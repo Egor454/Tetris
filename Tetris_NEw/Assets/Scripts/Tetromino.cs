@@ -18,6 +18,8 @@ public class Tetromino : MonoBehaviour
     private  float horizontalTimer=0;//таймер движения по горизонтали
     private  float buttonDownWaitTimer = 0;//таймер нажатия клавиши
 
+    private Game game;
+
     private  bool movedImmediateHorizontal = false;//движение по вертикали
     private bool movedImmediateVertical = false; //движения по горизонтали
 
@@ -34,7 +36,10 @@ public class Tetromino : MonoBehaviour
         CheckUserInput();
     }
 
-
+    public void Initialized(Game game)
+    {
+        this.game = game;
+    }
     void CheckUserInput()//регестрация всех нажатий пользователя на клавиатуру для упраления фигурой 
     {
         if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.DownArrow)|| Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.S))// если отпускает клавишу
@@ -69,7 +74,7 @@ public class Tetromino : MonoBehaviour
             transform.position += new Vector3(1, 0, 0);// двигаем вправо на 1 позицию 
             if (CheckIsValidPosition())
             {
-                FindObjectOfType<Game>().UpdateGrid(this);
+                game.UpdateGrid(this);
             }
             else
             {
@@ -98,7 +103,7 @@ public class Tetromino : MonoBehaviour
             transform.position += new Vector3(-1, 0, 0);//двигаем влево на 1 позицию
             if (CheckIsValidPosition())
             {
-                FindObjectOfType<Game>().UpdateGrid(this);
+                game.UpdateGrid(this);
             }
             else
             {
@@ -126,7 +131,7 @@ public class Tetromino : MonoBehaviour
                 }
                 if (CheckIsValidPosition())//проверяем столкновения с другими блками и фигурами 
                 {
-                    FindObjectOfType<Game>().UpdateGrid(this);//если все хорошо обновляем границу поля 
+                    game.UpdateGrid(this);//если все хорошо обновляем границу поля 
                 }
                 else//  иначе возвращаем фигуры в исходное положение
                 {
@@ -171,19 +176,19 @@ public class Tetromino : MonoBehaviour
             transform.position += new Vector3(0, -1, 0);//  двигаем вниз на 1 позицию
             if (CheckIsValidPosition())//проверка столкновений
             {
-                FindObjectOfType<Game>().UpdateGrid(this);// обновляем поле
+                game.UpdateGrid(this);// обновляем поле
             }
             else
             {
                 transform.position += new Vector3(0, 1, 0);// отменяем перемещение
-                FindObjectOfType<Game>().DeleteRow();// проверяем заполнили ли поле
-                if (FindObjectOfType<Game>().CheckIsAboveGrid(this))// если выполнилось условие пройгрыша 
+                game.DeleteRow();// проверяем заполнили ли поле
+                if (game.CheckIsAboveGrid(this))// если выполнилось условие пройгрыша 
                 {
-                    FindObjectOfType<Game>().GameOver();// игра окончена
+                    game.GameOver();// игра окончена
                 }
                 enabled = false;// запрет на управление этой фигурой
-                FindObjectOfType<Game>().UpdateIndividualScore();
-                FindObjectOfType<Game>().SpawnNextTetromino();// создаем следующую фигуру
+                game.UpdateIndividualScore();
+                game.SpawnNextTetromino();// создаем следующую фигуру
 
             }
             fall = Time.time;
@@ -193,12 +198,12 @@ public class Tetromino : MonoBehaviour
     {
         foreach(Transform mino in transform)
         {
-            Vector2 pos = FindObjectOfType<Game>().Round(mino.position);
-            if (FindObjectOfType<Game>().CheckIsInsideGrid(pos) == false)
+            Vector2 pos = game.Round(mino.position);
+            if (game.CheckIsInsideGrid(pos) == false)
             {
                 return false;
             }
-            if (FindObjectOfType<Game>().GetTransformAtGridPosition(pos)!=null && FindObjectOfType<Game>().GetTransformAtGridPosition(pos).parent != transform)
+            if (game.GetTransformAtGridPosition(pos)!=null && game.GetTransformAtGridPosition(pos).parent != transform)
             {
                 return false;
             

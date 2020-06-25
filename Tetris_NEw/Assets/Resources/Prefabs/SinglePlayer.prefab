@@ -188,6 +188,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5205969464869374545}
     m_Modifications:
+    - target: {fileID: 930134312503557384, guid: 6883e5a3adfcc4c48bab27b9927c69a7,
+        type: 3}
+      propertyPath: spawnNextPoint.x
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 930134312503557384, guid: 6883e5a3adfcc4c48bab27b9927c69a7,
+        type: 3}
+      propertyPath: spawnNextPoint.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 930134312503557384, guid: 6883e5a3adfcc4c48bab27b9927c69a7,
+        type: 3}
+      propertyPath: spawnPoint.x
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 930134312503557384, guid: 6883e5a3adfcc4c48bab27b9927c69a7,
+        type: 3}
+      propertyPath: spawnPoint.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 930134312503557384, guid: 6883e5a3adfcc4c48bab27b9927c69a7,
+        type: 3}
+      propertyPath: gridWidth
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 930134312503557384, guid: 6883e5a3adfcc4c48bab27b9927c69a7,
+        type: 3}
+      propertyPath: dinamicGridWidth
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 930134312503557384, guid: 6883e5a3adfcc4c48bab27b9927c69a7,
+        type: 3}
+      propertyPath: startOfField
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 3912502232512412650, guid: 6883e5a3adfcc4c48bab27b9927c69a7,
         type: 3}
       propertyPath: m_Name

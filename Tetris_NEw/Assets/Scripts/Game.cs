@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class Game : MonoBehaviour
 {
-   private  int gridWidth = 10;// ширина поле игры
+    [SerializeField] private  int gridWidth=10;// ширина поле игры
    private int gridHeight = 20;//высота поля игры
-   private Transform[,] grid;// обновленное поле игры,с учетом наличие на ней фигур 
-
+   private  Transform[,] grid;// обновленное поле игры,с учетом наличие на ней фигур 
+    [SerializeField] private int dinamicGridWidth;
     [SerializeField] private int scoreOneLine = 60;//очки которые прибавляются за 1 собранную линию
     [SerializeField] private int scoreTwoLine = 120;//очки которые прибавляются за 2 собранную линию
     [SerializeField] private int scoreThreeLine = 320;//очки которые прибавляются за 3 собранную линию
@@ -23,6 +23,14 @@ public class Game : MonoBehaviour
     [SerializeField]  private Text hud_score;//поле для вывода очков
     [SerializeField]  private Text hud_speed;//поле для вывода скорости
     [SerializeField]  private Text hud_lines;//поле для вывода линий заполненных
+
+    [SerializeField] private Vector2 spawnPoint;
+    [SerializeField] private Vector2 spawnNextPoint;
+
+    [SerializeField] private int startOfField;
+   // [SerializeField] private Vector2 spawnNextPoint;
+
+    //[SerializeField] private KeyCode downButton;
 
     private  int numberOfRowsThisTurn=0;//количество заполненных линий одновременно 
 
@@ -38,11 +46,9 @@ public class Game : MonoBehaviour
     [SerializeField] private float numLineCleared=0;// количество заполненных линий всего
     public float NumLineCleared => numLineCleared;
 
-    private  GameObject previewTetromino;// показывает следующую фигуру 
-    private  GameObject nextTetromino;// фигура которая появляется для управления
+    private Tetromino previewTetromino;// показывает следующую фигуру 
+    private  Tetromino nextTetromino;// фигура которая появляется для управления
 
-    private GameObject previewTwoTetromino;// показывает следующую фигуру 
-    private GameObject nextTwoTetromino;// фигура которая появляется для управления
 
     private  bool gameStarted = false;// началась игра или нет
 
@@ -191,6 +197,8 @@ public class Game : MonoBehaviour
             foreach (Transform mino in tetromino.transform)
             {
                 Vector2 pos = Round(mino.position);
+                if (pos.x > 19)
+                    pos.x = pos.x - 20;
                 if (pos.y > gridHeight - 1)
                 {
                     return true;
@@ -269,6 +277,8 @@ public class Game : MonoBehaviour
         foreach (Transform mino in tetromino.transform)
         {
             Vector2 pos = Round(mino.position);
+            if (pos.x > 19)
+                pos.x = pos.x - 20;
             if (pos.y < gridHeight)
             {
                 grid[(int)pos.x, (int)pos.y] = mino;
@@ -277,6 +287,8 @@ public class Game : MonoBehaviour
     }
     public Transform GetTransformAtGridPosition(Vector2 pos)//проверка появления фигуры
     {
+        if (pos.x > 19)
+            pos.x = pos.x - 20;
         //так как мы создаем экземпляр фигуры выше высоты сетки, которая не является частью массива, мы возвращаем null вместо попытки вернуть несуществующее преобразование
         if (pos.y > gridHeight - 1)
         {
@@ -297,32 +309,26 @@ public class Game : MonoBehaviour
             numLineCleared = 0;
             gameStarted = true;
 
-            nextTetromino = (GameObject)Instantiate(Resources.Load(GetRandomTetromino(), typeof(GameObject)), new Vector2(5.0f, 20.0f), Quaternion.identity,locationspawn);
-            previewTetromino = (GameObject)Instantiate(Resources.Load(GetRandomTetromino(), typeof(GameObject)), previewTetrominoPosition, Quaternion.identity, locationspawn);
+            nextTetromino = (Tetromino)Instantiate(Resources.Load(GetRandomTetromino(), typeof(Tetromino)), spawnPoint, Quaternion.identity,locationspawn);
+            nextTetromino.Initialized(this);
+            previewTetromino = (Tetromino)Instantiate(Resources.Load(GetRandomTetromino(), typeof(Tetromino)), spawnNextPoint, Quaternion.identity, locationspawn);
             previewTetromino.GetComponent<Tetromino>().enabled = false;
         }
         else//если игра уже идет, следующую фигуру перемещает под управление игрока и показывает следующую фигуру
         {
-            previewTetromino.transform.localPosition = new Vector2(5.0f, 20.0f);
+            previewTetromino.transform.position = spawnPoint;
             nextTetromino = previewTetromino;
             nextTetromino.GetComponent<Tetromino>().enabled = true;
 
-            previewTetromino = (GameObject)Instantiate(Resources.Load(GetRandomTetromino(), typeof(GameObject)), previewTetrominoPosition, Quaternion.identity, locationspawn);
+            previewTetromino = (Tetromino)Instantiate(Resources.Load(GetRandomTetromino(), typeof(Tetromino)), spawnNextPoint, Quaternion.identity, locationspawn);
+            nextTetromino.Initialized(this);
             previewTetromino.GetComponent<Tetromino>().enabled = false;
-            //if (GlobalScore.Instance.NumberPlayers == 1)
-            //{
-            //    previewTwoTetromino.transform.position = new Vector2(-25.0f, 20.0f);
-            //    nextTwoTetromino = previewTwoTetromino;
-            //    nextTwoTetromino.GetComponent<Tetromino>().enabled = true;
 
-            //    previewTwoTetromino = (GameObject)Instantiate(Resources.Load(GetRandomTetromino(), typeof(GameObject)), previewTwoTetrominoPosition, Quaternion.identity);
-            //    previewTwoTetromino.GetComponent<Tetromino>().enabled = false;
-            //}
         }
     }
     public bool CheckIsInsideGrid(Vector2 pos)// проверка столкновений с полем
     {
-        return ((int)pos.x >= 0 && (int)pos.x < gridWidth && (int)pos.y >= 0);
+        return ((int)pos.x >= startOfField && (int)pos.x < dinamicGridWidth && (int)pos.y >= 0);
     }
     public Vector2 Round(Vector2 pos)//округляет координаты фигур
     {

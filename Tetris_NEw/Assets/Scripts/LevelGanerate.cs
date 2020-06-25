@@ -15,12 +15,12 @@ public class LevelGanerate : MonoBehaviour
     {
         if (GlobalScore.Instance.NumberPlayers == 0)
         {
-            singleplayer = (GameObject)Instantiate(Resources.Load(LoadSingleLevel(), typeof(GameObject)), new Vector2(0.0f, 0.0f), Quaternion.identity);
+            singleplayer = (GameObject)Instantiate(Resources.Load(LoadSingleLevel(), typeof(GameObject)), new Vector2(20.0f, 0.0f), Quaternion.identity);
         }
         else
         {
-            twoplayers = (GameObject)Instantiate(Resources.Load(LoadSingleLevel(), typeof(GameObject)), new Vector2(-18.0f, 0.0f), Quaternion.identity);
-            singleplayer = (GameObject)Instantiate(Resources.Load(LoadSingleLevel(), typeof(GameObject)), new Vector2(0.0f, 0.0f), Quaternion.identity);
+            twoplayers = (GameObject)Instantiate(Resources.Load(LoadTwoLevel(), typeof(GameObject)), new Vector2(0.0f, 0.0f), Quaternion.identity);
+            singleplayer = (GameObject)Instantiate(Resources.Load(LoadSingleLevel(), typeof(GameObject)), new Vector2(20.0f, 0.0f), Quaternion.identity);
         }
     }
     string LoadSingleLevel()
@@ -30,7 +30,7 @@ public class LevelGanerate : MonoBehaviour
     }
     string LoadTwoLevel()
     {
-        string LevelTwoName = "Prefabs/TwoPlayer ";
+        string LevelTwoName = "Prefabs/TwoPlayer";
         return LevelTwoName;
     }
 }
