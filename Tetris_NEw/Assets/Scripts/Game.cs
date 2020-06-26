@@ -15,6 +15,8 @@ public class Game : MonoBehaviour
     [SerializeField] private int scoreThreeLine = 320;//очки которые прибавляются за 3 собранную линию
     [SerializeField] private int scoreFourLine = 1400;//очки которые прибавляются за 4 собранную линию
 
+    private float fall = 0;
+
     [SerializeField] private Transform locationspawn;
 
     [SerializeField] private float fallSpeed=1.0f;//скорость падения фигур вниз
@@ -25,12 +27,14 @@ public class Game : MonoBehaviour
     [SerializeField]  private Text hud_lines;//поле для вывода линий заполненных
 
     [SerializeField] private Vector2 spawnPoint;
-    [SerializeField] private Vector2 spawnNextPoint;
+    [SerializeField] private Vector2 previewPoint;
 
     [SerializeField] private int startOfField;
-   // [SerializeField] private Vector2 spawnNextPoint;
 
-    //[SerializeField] private KeyCode downButton;
+    [SerializeField] private KeyCode downButton;
+    [SerializeField] private KeyCode rightButton;
+    [SerializeField] private KeyCode leftButton;
+    [SerializeField] private KeyCode rotateButton;
 
     private  int numberOfRowsThisTurn=0;//количество заполненных линий одновременно 
 
@@ -49,12 +53,11 @@ public class Game : MonoBehaviour
     private Tetromino previewTetromino;// показывает следующую фигуру 
     private  Tetromino nextTetromino;// фигура которая появляется для управления
 
+    private Tetromino tetromino;
 
     private  bool gameStarted = false;// началась игра или нет
 
-    private Vector2 previewTetrominoPosition = new Vector2(15.0f, 15);// расположение следующей фигуры на экране
-    private Vector2 previewTwoTetrominoPosition = new Vector2(-15.0f, 15);// расположение следующей фигуры на экране
-
+    
     void Start()// старт игры
     {
         SpawnNextTetromino();
@@ -64,9 +67,42 @@ public class Game : MonoBehaviour
     //Update is called once per frame
     void Update()
     {
+        PlayerMovement();
         UpdateSpeedPlayer();
         UpdateScore();
         UpdateUI();
+
+    }
+    public void Initialized(Tetromino tetromino)
+    {
+        this.tetromino = tetromino;
+    }
+    public void InsertFall(float newFall)
+    {
+        fall = newFall;
+    }
+    void  PlayerMovement()
+    {
+        if (Input.GetKeyUp(downButton) || Input.GetKeyUp(rightButton) || Input.GetKeyUp(leftButton))
+        {
+            tetromino.CheckUserInput();
+        }
+         if (Input.GetKey(rightButton))
+        {
+            tetromino.RightMovement(nextTetromino);
+        }
+        else if (Input.GetKey(leftButton))
+        {
+            tetromino.LeftMovement(nextTetromino);
+        }
+        else if (Input.GetKeyDown(rotateButton))
+        {
+            tetromino.Rotation(nextTetromino);
+        }
+        else if (Input.GetKey(downButton) || Time.time - fall >= fallSpeed)
+        {
+            tetromino.VerticalMovement(nextTetromino);
+        }
     }
     void UpdateSpeedPlayer()//функция которая отлавливает нажатия игрока на + и -, и в зависимости от нажатой кнопки меняет скорость падения фигур вниз
     {
@@ -309,10 +345,10 @@ public class Game : MonoBehaviour
             numLineCleared = 0;
             gameStarted = true;
 
-            nextTetromino = (Tetromino)Instantiate(Resources.Load(GetRandomTetromino(), typeof(Tetromino)), spawnPoint, Quaternion.identity,locationspawn);
-            nextTetromino.Initialized(this);
-            previewTetromino = (Tetromino)Instantiate(Resources.Load(GetRandomTetromino(), typeof(Tetromino)), spawnNextPoint, Quaternion.identity, locationspawn);
+            previewTetromino = (Tetromino)Instantiate(Resources.Load(GetRandomTetromino(), typeof(Tetromino)), previewPoint, Quaternion.identity,locationspawn);
+            nextTetromino = (Tetromino)Instantiate(Resources.Load(GetRandomTetromino(), typeof(Tetromino)), spawnPoint, Quaternion.identity, locationspawn);
             previewTetromino.GetComponent<Tetromino>().enabled = false;
+            nextTetromino.Initialized(this);
         }
         else//если игра уже идет, следующую фигуру перемещает под управление игрока и показывает следующую фигуру
         {
@@ -320,9 +356,10 @@ public class Game : MonoBehaviour
             nextTetromino = previewTetromino;
             nextTetromino.GetComponent<Tetromino>().enabled = true;
 
-            previewTetromino = (Tetromino)Instantiate(Resources.Load(GetRandomTetromino(), typeof(Tetromino)), spawnNextPoint, Quaternion.identity, locationspawn);
-            nextTetromino.Initialized(this);
+            previewTetromino = (Tetromino)Instantiate(Resources.Load(GetRandomTetromino(), typeof(Tetromino)), previewPoint, Quaternion.identity, locationspawn);
             previewTetromino.GetComponent<Tetromino>().enabled = false;
+
+            nextTetromino.Initialized(this);
 
         }
     }

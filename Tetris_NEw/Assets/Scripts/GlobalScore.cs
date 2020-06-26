@@ -13,6 +13,7 @@ public class GlobalScore : GlobalResultManager<GlobalScore>
     [SerializeField] private float lineEnd;
     public float LineEnd=>lineEnd;
 
+
     public void InsertScore(int scoreend, float lineend)
     {
         scoreEnd = scoreend;
@@ -22,5 +23,6 @@ public class GlobalScore : GlobalResultManager<GlobalScore>
     {
         numberPlayers = number;
     }
+
 
 }

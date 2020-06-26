@@ -5,6 +5,7 @@ using UnityEngine;
 public class Tetromino : MonoBehaviour
 {
     private float fall = 0;//таймер обратного отсчета для скорости падения
+    private float Fall => fall;
 
     private float fallSpeed;// скорость падения 
     [SerializeField] private bool allowRotation = true;// переменная которая позволяет вращать фигуру 
@@ -18,7 +19,8 @@ public class Tetromino : MonoBehaviour
     private  float horizontalTimer=0;//таймер движения по горизонтали
     private  float buttonDownWaitTimer = 0;//таймер нажатия клавиши
 
-    private Game game;
+     private  Game game;
+
 
     private  bool movedImmediateHorizontal = false;//движение по вертикали
     private bool movedImmediateVertical = false; //движения по горизонтали
@@ -26,33 +28,22 @@ public class Tetromino : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-         fallSpeed = GameObject.Find("GameScript").GetComponent<Game>().FallSpeed;//получем и присваиваем занчение переменноq fallSpeed из класса Game 
-
+         //fallSpeed = GameObject.Find("GameScript").GetComponent<Game>().FallSpeed;//получем и присваиваем занчение переменноq fallSpeed из класса Game 
     }
 
     // Update is called once per frame
     void Update()
     {
-        CheckUserInput();
+
     }
 
     public void Initialized(Game game)
     {
         this.game = game;
+        game.Initialized(this);
     }
-    void CheckUserInput()//регестрация всех нажатий пользователя на клавиатуру для упраления фигурой 
+    public void RightMovement(Tetromino tetromino)
     {
-        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.DownArrow)|| Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.S))// если отпускает клавишу
-        {
-            movedImmediateHorizontal = false;
-            movedImmediateVertical = false;
-
-            horizontalTimer = 0;
-            verticalTimer = 0;
-            buttonDownWaitTimer = 0;
-        }
-        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))//нажимаем клавишу D или стрелку Вправо
-        {
             if (movedImmediateHorizontal)
             {
                 if (buttonDownWaitTimer < buttonDownWaitMax)
@@ -71,17 +62,18 @@ public class Tetromino : MonoBehaviour
                 movedImmediateHorizontal = true;
             }
             horizontalTimer = 0;
-            transform.position += new Vector3(1, 0, 0);// двигаем вправо на 1 позицию 
+        tetromino.transform.position += new Vector3(1, 0, 0);// двигаем вправо на 1 позицию 
             if (CheckIsValidPosition())
             {
                 game.UpdateGrid(this);
             }
             else
             {
-                transform.position += new Vector3(-1, 0, 0);// если занято ,возращаем прежнее положение 
+            tetromino.transform.position += new Vector3(-1, 0, 0);// если занято ,возращаем прежнее положение 
             }
-        }else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))//нажимаем клавишу A или стрелку Влево
-        {
+    }
+    public void LeftMovement(Tetromino tetromino)
+    { 
             if (movedImmediateHorizontal)
             {
                 if (buttonDownWaitTimer < buttonDownWaitMax)
@@ -100,61 +92,19 @@ public class Tetromino : MonoBehaviour
                 movedImmediateHorizontal = true;
             }
             horizontalTimer = 0;
-            transform.position += new Vector3(-1, 0, 0);//двигаем влево на 1 позицию
+        tetromino.transform.position += new Vector3(-1, 0, 0);//двигаем влево на 1 позицию
             if (CheckIsValidPosition())
             {
                 game.UpdateGrid(this);
             }
             else
             {
-                transform.position += new Vector3(1, 0, 0);// если занято ,возращаем прежнее положение 
+            tetromino.transform.position += new Vector3(1, 0, 0);// если занято ,возращаем прежнее положение 
             }
-        }
-        else if (Input.GetKeyDown(KeyCode.Space))// Нажимаем клавишу Space
-        {
-            if (allowRotation)//если мы можем вращать фигуру выполняем 
-            {
-                if (limitRotation)// если ограниченно вращение 
-                {
-                    if (transform.rotation.eulerAngles.z >= 90)
-                    {
-                        transform.Rotate(0, 0, -90);
-                    }
-                    else
-                    {
-                        transform.Rotate(0, 0, 90);
-                    }
-                }
-                else// иначе вращаем
-                {
-                    transform.Rotate(0, 0, 90);
-                }
-                if (CheckIsValidPosition())//проверяем столкновения с другими блками и фигурами 
-                {
-                    game.UpdateGrid(this);//если все хорошо обновляем границу поля 
-                }
-                else//  иначе возвращаем фигуры в исходное положение
-                {
-                    if (limitRotation)
-                    {
-                        if (transform.rotation.eulerAngles.z >= 90)
-                        {
-                            transform.Rotate(0, 0, -90);
-                        }
-                        else
-                        {
-                            transform.Rotate(0, 0, 90);
-                        }
-                    }
-                    else
-                    {
-                        transform.Rotate(0, 0, -90);
-                    }
-                }
-            }
-        }
-        else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Time.time - fall >= fallSpeed)// если нажата кнопка S или стрелка Вниз или пришло время опустить фигуру вниз
-        {
+        
+    }
+    public void VerticalMovement(Tetromino tetromino)
+    {
             if (movedImmediateVertical)
             {
                 if (buttonDownWaitTimer < buttonDownWaitMax)
@@ -173,14 +123,14 @@ public class Tetromino : MonoBehaviour
                 movedImmediateVertical = true;
             }
             verticalTimer = 0;
-            transform.position += new Vector3(0, -1, 0);//  двигаем вниз на 1 позицию
+           tetromino.transform.position += new Vector3(0, -1, 0);//  двигаем вниз на 1 позицию
             if (CheckIsValidPosition())//проверка столкновений
             {
                 game.UpdateGrid(this);// обновляем поле
             }
             else
             {
-                transform.position += new Vector3(0, 1, 0);// отменяем перемещение
+            tetromino.transform.position += new Vector3(0, 1, 0);// отменяем перемещение
                 game.DeleteRow();// проверяем заполнили ли поле
                 if (game.CheckIsAboveGrid(this))// если выполнилось условие пройгрыша 
                 {
@@ -192,7 +142,66 @@ public class Tetromino : MonoBehaviour
 
             }
             fall = Time.time;
-        }
+        game.InsertFall(fall);
+
+
+
+    }
+    public void Rotation(Tetromino tetromino)
+    {
+        
+            if (allowRotation)//если мы можем вращать фигуру выполняем 
+            {
+                if (limitRotation)// если ограниченно вращение 
+                {
+                    if (tetromino.transform.rotation.eulerAngles.z >= 90)
+                    {
+                    tetromino.transform.Rotate(0, 0, -90);
+                    }
+                    else
+                    {
+                    tetromino.transform.Rotate(0, 0, 90);
+                    }
+                }
+                else// иначе вращаем
+                {
+                tetromino.transform.Rotate(0, 0, 90);
+                }
+                if (CheckIsValidPosition())//проверяем столкновения с другими блками и фигурами 
+                {
+                    game.UpdateGrid(this);//если все хорошо обновляем границу поля 
+                }
+                else//  иначе возвращаем фигуры в исходное положение
+                {
+                    if (limitRotation)
+                    {
+                        if (tetromino.transform.rotation.eulerAngles.z >= 90)
+                        {
+                        tetromino.transform.Rotate(0, 0, -90);
+                        }
+                        else
+                        {
+                        tetromino.transform.Rotate(0, 0, 90);
+                        }
+                    }
+                    else
+                    {
+                        transform.Rotate(0, 0, -90);
+                    }
+                }
+            }
+        
+    }
+   public  void  CheckUserInput()//регестрация всех нажатий пользователя на клавиатуру для упраления фигурой 
+    {
+
+            movedImmediateHorizontal = false;
+            movedImmediateVertical = false;
+
+            horizontalTimer = 0;
+            verticalTimer = 0;
+            buttonDownWaitTimer = 0;
+
     }
     bool CheckIsValidPosition()//  проверка столкновений 
     {
