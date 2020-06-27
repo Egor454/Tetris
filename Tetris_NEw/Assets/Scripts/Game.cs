@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class Game : MonoBehaviour
 {
     [SerializeField] private  int gridWidth=10;// ширина поле игры
-   private int gridHeight = 20;//высота поля игры
-   private  Transform[,] grid;// обновленное поле игры,с учетом наличие на ней фигур 
+    private int gridHeight = 20;//высота поля игры
+    private  Transform[,] grid;// обновленное поле игры,с учетом наличие на ней фигур 
     [SerializeField] private int dinamicGridWidth;
     [SerializeField] private int scoreOneLine = 60;//очки которые прибавляются за 1 собранную линию
     [SerializeField] private int scoreTwoLine = 120;//очки которые прибавляются за 2 собранную линию
@@ -55,13 +55,23 @@ public class Game : MonoBehaviour
 
     private Tetromino tetromino;
 
+    private int playersFinished = 0;
+
+    private int playerNumber;
+
     private  bool gameStarted = false;// началась игра или нет
 
     
     void Start()// старт игры
     {
         SpawnNextTetromino();
-
+        GlobalScore.Instance.Restrat();
+        playerNumber = 1;
+        GlobalScore.Instance.InsertPlayerNumber(playerNumber);
+        if(GlobalScore.Instance.PlayerNumbers==1 && GlobalScore.Instance.NumberPlayers == 1)
+        {
+            playerNumber = 2;
+        }
     }
 
     //Update is called once per frame
@@ -404,8 +414,10 @@ public class Game : MonoBehaviour
     public void GameOver()// окончание игры, вызов сцены с результатами 
     {
         gameOver = true;
-        GlobalScore.Instance.InsertScore(currentScore, numLineCleared);
-        FindObjectOfType<SceneSwap>().UpdateScene();
-
+        playersFinished++;
+        GlobalScore.Instance.InsertPlayersFinished(playersFinished);
+        GlobalScore.Instance.InsertScore(currentScore, numLineCleared,playerNumber);
+        this.enabled = false;
+        FindObjectOfType<SceneSwap>().UpdateScene(gameOver);
     }
 }

@@ -19,8 +19,8 @@ public class LevelGanerate : MonoBehaviour
         }
         else
         {
-            twoplayers = (GameObject)Instantiate(Resources.Load(LoadTwoLevel(), typeof(GameObject)), new Vector2(0.0f, 0.0f), Quaternion.identity);
             singleplayer = (GameObject)Instantiate(Resources.Load(LoadSingleLevel(), typeof(GameObject)), new Vector2(20.0f, 0.0f), Quaternion.identity);
+            twoplayers = (GameObject)Instantiate(Resources.Load(LoadTwoLevel(), typeof(GameObject)), new Vector2(0.0f, 0.0f), Quaternion.identity);
         }
     }
     string LoadSingleLevel()

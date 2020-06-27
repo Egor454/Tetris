@@ -4,25 +4,53 @@ using UnityEngine;
 
 public class GlobalScore : GlobalResultManager<GlobalScore>
 {
-    [SerializeField] private int scoreEnd;
+     private int scoreEnd;
     public int ScoreEnd=>scoreEnd;
 
-    [SerializeField] private int numberPlayers;
+     private int numberPlayers;
     public int NumberPlayers => numberPlayers;
 
-    [SerializeField] private float lineEnd;
+     private float lineEnd;
     public float LineEnd=>lineEnd;
 
+    private float lineEnd2;
+    public float LineEnd2 => lineEnd2;
 
-    public void InsertScore(int scoreend, float lineend)
+    private int scoreEnd2;
+    public int ScoreEnd2 => scoreEnd2;
+
+    private float playersFinished;
+    public float PlayersFinished => playersFinished;
+
+    private float playerNumbers;
+    public float PlayerNumbers => playerNumbers;
+
+    public void InsertScore(int scoreend, float lineend, int playernumber)
     {
-        scoreEnd = scoreend;
-        lineEnd = lineend;
+        if (playernumber == 1)
+        {
+            scoreEnd = scoreend;
+            lineEnd = lineend;
+        }else if(playernumber == 2)
+        {
+            scoreEnd2 = scoreend;
+            lineEnd2 = lineend;
+        }
     }
-    public void Insertnumberplayers(int number)
+    public void InsertNumberPlayers(int number)
     {
         numberPlayers = number;
     }
-
-
+    public void InsertPlayersFinished(int finished)
+    {
+        playersFinished += finished;
+    }
+    public void InsertPlayerNumber(int playernumber)
+    {
+        playerNumbers = playernumber;
+    }
+    public void Restrat()
+    {
+        playersFinished = 0;
+    }
 }
