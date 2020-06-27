@@ -23,13 +23,6 @@ public class NumberOfPlayers : MonoBehaviour
         playerСhoice = 1;
         GlobalScore.Instance.InsertNumberPlayers(playerСhoice);
     }
-    public void ThreePlayers()
-    {
-
-    }
-    public void FourPlayers()
-    {
-
-    }
+ 
 
 }

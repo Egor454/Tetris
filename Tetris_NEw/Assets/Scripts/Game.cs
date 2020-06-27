@@ -36,6 +36,14 @@ public class Game : MonoBehaviour
     [SerializeField] private KeyCode leftButton;
     [SerializeField] private KeyCode rotateButton;
 
+    [SerializeField] private Tetromino Tetromino_J;
+    [SerializeField] private Tetromino Tetromino_L;
+    [SerializeField] private Tetromino Tetromino_T;
+    [SerializeField] private Tetromino Tetromino_Long;
+    [SerializeField] private Tetromino Tetromino_Square;
+    [SerializeField] private Tetromino Tetromino_S;
+    [SerializeField] private Tetromino Tetromino_Z;
+
     private  int numberOfRowsThisTurn=0;//количество заполненных линий одновременно 
 
     [SerializeField] private int currentScore = 0;//очки игрока
@@ -51,7 +59,7 @@ public class Game : MonoBehaviour
     public float NumLineCleared => numLineCleared;
 
     private Tetromino previewTetromino;// показывает следующую фигуру 
-    private  Tetromino nextTetromino;// фигура которая появляется для управления
+    private Tetromino nextTetromino;// фигура которая появляется для управления
 
     private Tetromino tetromino;
 
@@ -72,6 +80,7 @@ public class Game : MonoBehaviour
         {
             playerNumber = 2;
         }
+        
     }
 
     //Update is called once per frame
@@ -355,10 +364,11 @@ public class Game : MonoBehaviour
             numLineCleared = 0;
             gameStarted = true;
 
-            previewTetromino = (Tetromino)Instantiate(Resources.Load(GetRandomTetromino(), typeof(Tetromino)), previewPoint, Quaternion.identity,locationspawn);
-            nextTetromino = (Tetromino)Instantiate(Resources.Load(GetRandomTetromino(), typeof(Tetromino)), spawnPoint, Quaternion.identity, locationspawn);
+            previewTetromino = (Tetromino)Instantiate(GetRandomTetromino(), previewPoint, Quaternion.identity,locationspawn);
+            nextTetromino = (Tetromino)Instantiate(GetRandomTetromino(), spawnPoint, Quaternion.identity, locationspawn);
             previewTetromino.GetComponent<Tetromino>().enabled = false;
             nextTetromino.Initialized(this);
+            
         }
         else//если игра уже идет, следующую фигуру перемещает под управление игрока и показывает следующую фигуру
         {
@@ -366,8 +376,9 @@ public class Game : MonoBehaviour
             nextTetromino = previewTetromino;
             nextTetromino.GetComponent<Tetromino>().enabled = true;
 
-            previewTetromino = (Tetromino)Instantiate(Resources.Load(GetRandomTetromino(), typeof(Tetromino)), previewPoint, Quaternion.identity, locationspawn);
+            previewTetromino = (Tetromino)Instantiate(GetRandomTetromino(), previewPoint, Quaternion.identity, locationspawn);
             previewTetromino.GetComponent<Tetromino>().enabled = false;
+            
 
             nextTetromino.Initialized(this);
 
@@ -381,32 +392,32 @@ public class Game : MonoBehaviour
     {
         return new Vector2(Mathf.Round(pos.x), Mathf.Round(pos.y));
     }
-    string GetRandomTetromino()// рандомное определение следующей фигуры
+    Tetromino GetRandomTetromino()// рандомное определение следующей фигуры
     {
         int randomTetromino = Random.Range(1, 8);
-        string randomTetrominoName = "Prefabs/Tetromino_T";
+        Tetromino randomTetrominoName = Tetromino_J;
         switch (randomTetromino)
         {
             case 1:
-                randomTetrominoName = "Prefabs/Tetromino_J";
+                randomTetrominoName = Tetromino_J;
                 break;
             case 2:
-                randomTetrominoName = "Prefabs/Tetromino_L";
+                randomTetrominoName = Tetromino_L;
                 break;
             case 3:
-                randomTetrominoName = "Prefabs/Tetromino_T";
+                randomTetrominoName = Tetromino_T;
                 break;
             case 4:
-                randomTetrominoName = "Prefabs/Tetromino_Long";
+                randomTetrominoName = Tetromino_Long;
                 break;
             case 5:
-                randomTetrominoName = "Prefabs/Tetromino_Square";
+                randomTetrominoName = Tetromino_Square;
                 break;
             case 6:
-                randomTetrominoName = "Prefabs/Tetromino_S";
+                randomTetrominoName = Tetromino_S;
                 break;
             case 7:
-                randomTetrominoName = "Prefabs/Tetromino_Z";
+                randomTetrominoName = Tetromino_Z;
                 break;
         }
         return randomTetrominoName;

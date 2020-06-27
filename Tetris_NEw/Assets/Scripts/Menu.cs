@@ -9,4 +9,8 @@ public class Menu : MonoBehaviour
     {
         SceneManager.LoadScene("NumberOfPlayers");
     }
+    public void Control()
+    {
+        SceneManager.LoadScene("Control");
+    }
 }
