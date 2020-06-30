@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class NumberOfPlayers : MonoBehaviour
 {
     private int playerСhoice;
-   public void Back()
+    public void Back()
     {
         SceneManager.LoadScene("Menu");
     }
@@ -23,6 +21,6 @@ public class NumberOfPlayers : MonoBehaviour
         playerСhoice = 1;
         GlobalScore.Instance.InsertNumberPlayers(playerСhoice);
     }
- 
+
 
 }

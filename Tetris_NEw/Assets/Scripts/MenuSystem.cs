@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -8,7 +6,6 @@ public class MenuSystem : MonoBehaviour
 {
     [SerializeField] private Text hud_scoreend;//поле для вывода конечных набранных очков на экран
     [SerializeField] private Text hud_linesend;// поле вывода конечных заполненых линий на экран
-
     [SerializeField] private Text hud_scoreend2;//поле для вывода конечных набранных очков на экран
     [SerializeField] private Text hud_linesend2;// поле вывода конечных заполненых линий на экран
 
@@ -20,7 +17,7 @@ public class MenuSystem : MonoBehaviour
     {
         SceneManager.LoadScene("Level");
     }
-     void Awake()//функция обновления
+    void Awake()//функция обновления
     {
         Endscore();
     }
@@ -32,7 +29,7 @@ public class MenuSystem : MonoBehaviour
             hud_linesend.text = GlobalScore.Instance.LineEnd.ToString();
 
         }
-        else if(GlobalScore.Instance.NumberPlayers == 1)
+        else if (GlobalScore.Instance.NumberPlayers == 1)
         {
             hud_scoreend.text = GlobalScore.Instance.ScoreEnd.ToString();
             hud_linesend.text = GlobalScore.Instance.LineEnd.ToString();

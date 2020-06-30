@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MonoBehaviourSingleton<T> : MonoBehaviour where T : MonoBehaviour
 {
@@ -34,7 +32,7 @@ public class MonoBehaviourSingleton<T> : MonoBehaviour where T : MonoBehaviour
                         instance = singletonObject.AddComponent<T>();
                         singletonObject.name = typeof(T).ToString() + " (Singleton)";
 
- 
+
                         DontDestroyOnLoad(singletonObject);
                     }
                 }

@@ -4,25 +4,20 @@ using UnityEngine;
 
 public class GlobalScore : MonoBehaviourSingleton<GlobalScore>
 {
-     private int scoreEnd;
-    public int ScoreEnd=>scoreEnd;
-
-     private int numberPlayers;
-    public int NumberPlayers => numberPlayers;
-
-     private int lineEnd;
-    public int LineEnd =>lineEnd;
-
-    private int lineEnd2;
-    public int LineEnd2 => lineEnd2;
-
-    private int scoreEnd2;
-    public int ScoreEnd2 => scoreEnd2;
-
-    private int playersFinished;
-    public int PlayersFinished => playersFinished;
-
+    private int scoreEnd;
     private int playerNumbers;
+    private int numberPlayers;
+    private int lineEnd;
+    private int lineEnd2;
+    private int scoreEnd2;
+    private int playersFinished;
+
+    public int ScoreEnd => scoreEnd;
+    public int NumberPlayers => numberPlayers;
+    public int LineEnd => lineEnd;
+    public int LineEnd2 => lineEnd2;
+    public int ScoreEnd2 => scoreEnd2;
+    public int PlayersFinished => playersFinished;
     public int PlayerNumbers => playerNumbers;
 
     public void InsertScore(int scoreend, int lineend, int playernumber)
@@ -31,7 +26,8 @@ public class GlobalScore : MonoBehaviourSingleton<GlobalScore>
         {
             scoreEnd = scoreend;
             lineEnd = lineend;
-        }else if(playernumber == 2)
+        }
+        else if (playernumber == 2)
         {
             scoreEnd2 = scoreend;
             lineEnd2 = lineend;

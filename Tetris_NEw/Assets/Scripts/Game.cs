@@ -1,41 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class Game : MonoBehaviour
 {
-    [SerializeField] private  int gridWidth=10;// ширина поле игры
-    private int gridHeight = 20;//высота поля игры
-    private  Transform[,] grid;// обновленное поле игры,с учетом наличие на ней фигур 
+    [SerializeField] private int gridWidth = 10;// ширина поле игры
     [SerializeField] private int dinamicGridWidth;
     [SerializeField] private int scoreOneLine = 60;//очки которые прибавляются за 1 собранную линию
     [SerializeField] private int scoreTwoLine = 120;//очки которые прибавляются за 2 собранную линию
     [SerializeField] private int scoreThreeLine = 320;//очки которые прибавляются за 3 собранную линию
     [SerializeField] private int scoreFourLine = 1400;//очки которые прибавляются за 4 собранную линию
-
-    private float fall = 0;
-
     [SerializeField] private Transform locationspawn;
-
-    [SerializeField] private float fallSpeed=1.0f;//скорость падения фигур вниз
-    public float FallSpeed => fallSpeed;
-
-    [SerializeField]  private Text hud_score;//поле для вывода очков
-    [SerializeField]  private Text hud_speed;//поле для вывода скорости
-    [SerializeField]  private Text hud_lines;//поле для вывода линий заполненных
-
+    [SerializeField] private float fallSpeed = 1.0f;//скорость падения фигур вниз
+    [SerializeField] private Text hud_score;//поле для вывода очков
+    [SerializeField] private Text hud_speed;//поле для вывода скорости
+    [SerializeField] private Text hud_lines;//поле для вывода линий заполненных
     [SerializeField] private Vector2 spawnPoint;
     [SerializeField] private Vector2 previewPoint;
-
     [SerializeField] private int startOfField;
-
     [SerializeField] private KeyCode downButton;
     [SerializeField] private KeyCode rightButton;
     [SerializeField] private KeyCode leftButton;
     [SerializeField] private KeyCode rotateButton;
-
     [SerializeField] private Tetromino Tetromino_J;
     [SerializeField] private Tetromino Tetromino_L;
     [SerializeField] private Tetromino Tetromino_T;
@@ -43,44 +28,42 @@ public class Game : MonoBehaviour
     [SerializeField] private Tetromino Tetromino_Square;
     [SerializeField] private Tetromino Tetromino_S;
     [SerializeField] private Tetromino Tetromino_Z;
-
-    private  int numberOfRowsThisTurn=0;//количество заполненных линий одновременно 
-
     [SerializeField] private int currentScore = 0;//очки игрока
-    public int CurrentScore => currentScore;
-    [SerializeField] private bool gameOver=false;
-    public bool Gameover => gameOver;
-
+    [SerializeField] private bool gameOver = false;
     [SerializeField] private int individualScore = 100;//бонусные очки которые начисляются  если быстро опустить фигуры вниз
+    [SerializeField] private int numLineCleared = 0;// количество заполненных линий всего
+
+    private int gridHeight = 20;//высота поля игры
+    private Transform[,] grid;// обновленное поле игры,с учетом наличие на ней фигур 
+    private float fall = 0;
+    private int numberOfRowsThisTurn = 0;//количество заполненных линий одновременно 
     private float individualScoreTime;// таймер для бонусных очков
-
     private float currentLevel = 0;// уровень игры который меняет скорость падения фигур ,в зависимости от количества заполненных линий
-    [SerializeField] private int numLineCleared =0;// количество заполненных линий всего
-    public int NumLineCleared => numLineCleared;
-
     private Tetromino previewTetromino;// показывает следующую фигуру 
     private Tetromino nextTetromino;// фигура которая появляется для управления
-
     private Tetromino tetromino;
-
     private int playersFinished = 0;
-
     private int playerNumber;
+    private bool gameStarted = false;// началась игра или нет
+    private int checkingFieldOverflow = 19;
+    private int fieldChangeToNormalValue = 20;
 
-    private  bool gameStarted = false;// началась игра или нет
+    public float FallSpeed => fallSpeed;
+    public int CurrentScore => currentScore;
+    public bool Gameover => gameOver;
+    public int NumLineCleared => numLineCleared;
 
-    
     void Start()// старт игры
     {
         SpawnNextTetromino();
         GlobalScore.Instance.Restrat();
         playerNumber = 1;
         GlobalScore.Instance.InsertPlayerNumber(playerNumber);
-        if(GlobalScore.Instance.PlayerNumbers==1 && GlobalScore.Instance.NumberPlayers == 1)
+        if (GlobalScore.Instance.PlayerNumbers == 1 && GlobalScore.Instance.NumberPlayers == 1)
         {
             playerNumber = 2;
         }
-        
+
     }
 
     //Update is called once per frame
@@ -92,7 +75,7 @@ public class Game : MonoBehaviour
         UpdateUI();
 
     }
-    public void Initialized(Tetromino tetromino)
+    public void Initialize(Tetromino tetromino)
     {
         this.tetromino = tetromino;
     }
@@ -100,13 +83,13 @@ public class Game : MonoBehaviour
     {
         fall = newFall;
     }
-    void  PlayerMovement()
+    void PlayerMovement()
     {
         if (Input.GetKeyUp(downButton) || Input.GetKeyUp(rightButton) || Input.GetKeyUp(leftButton))
         {
             tetromino.CheckUserInput();
         }
-         if (Input.GetKey(rightButton))
+        if (Input.GetKey(rightButton))
         {
             tetromino.RightMovement(nextTetromino);
         }
@@ -131,21 +114,12 @@ public class Game : MonoBehaviour
             {
                 fallSpeed = fallSpeed - 0.1f;
             }
-            else
-            {
-                
-            }
-            
         }
-        else if(Input.GetKeyDown(KeyCode.KeypadMinus))
+        else if (Input.GetKeyDown(KeyCode.KeypadMinus))
         {
             if (fallSpeed <= 2)
             {
                 fallSpeed = fallSpeed + 0.1f;
-            }
-            else
-            {
-                
             }
         }
     }
@@ -162,14 +136,10 @@ public class Game : MonoBehaviour
             fallSpeed = fallSpeed - (currentLevel * 0.4f);
             Debug.Log("Current Fall Speed:" + fallSpeed);
         }
-        else
-        {
-
-        }
     }
     public void UpdateUI()// функция для вывода значений(очков,уровня,линий) на экран
     {
-        if (fallSpeed >-1 && fallSpeed<0.00000001)
+        if (fallSpeed > -1 && fallSpeed < 0.00000001)
         {
             hud_speed.text = 0.ToString();
         }
@@ -252,8 +222,8 @@ public class Game : MonoBehaviour
             foreach (Transform mino in tetromino.transform)
             {
                 Vector2 pos = Round(mino.position);
-                if (pos.x > 19)
-                    pos.x = pos.x - 20;
+                if (pos.x > checkingFieldOverflow)
+                    pos.x = pos.x - fieldChangeToNormalValue;
                 if (pos.y > gridHeight - 1)
                 {
                     return true;
@@ -332,8 +302,8 @@ public class Game : MonoBehaviour
         foreach (Transform mino in tetromino.transform)
         {
             Vector2 pos = Round(mino.position);
-            if (pos.x > 19)
-                pos.x = pos.x - 20;
+            if (pos.x > checkingFieldOverflow)
+                pos.x = pos.x - fieldChangeToNormalValue;
             if (pos.y < gridHeight)
             {
                 grid[(int)pos.x, (int)pos.y] = mino;
@@ -342,15 +312,15 @@ public class Game : MonoBehaviour
     }
     public Transform GetTransformAtGridPosition(Vector2 pos)//проверка появления фигуры
     {
-        if (pos.x > 19)
-            pos.x = pos.x - 20;
+        if (pos.x > checkingFieldOverflow)
+            pos.x = pos.x - fieldChangeToNormalValue;
         //так как мы создаем экземпляр фигуры выше высоты сетки, которая не является частью массива, мы возвращаем null вместо попытки вернуть несуществующее преобразование
         if (pos.y > gridHeight - 1)
         {
             return null;
         }
         //если фигура находится ниже высоты сетки, мы можем вернуть преобразование в позицию
-        else 
+        else
         {
             return grid[(int)pos.x, (int)pos.y];
         }
@@ -363,24 +333,20 @@ public class Game : MonoBehaviour
             currentScore = 0;
             numLineCleared = 0;
             gameStarted = true;
-
-            previewTetromino = Instantiate(GetRandomTetromino(), previewPoint, Quaternion.identity,locationspawn);
+            previewTetromino = Instantiate(GetRandomTetromino(), previewPoint, Quaternion.identity, locationspawn);
             nextTetromino = Instantiate(GetRandomTetromino(), spawnPoint, Quaternion.identity, locationspawn);
             previewTetromino.GetComponent<Tetromino>().enabled = false;
-            nextTetromino.Initialized(this);
-            
+            nextTetromino.Initialize(this);
+
         }
         else//если игра уже идет, следующую фигуру перемещает под управление игрока и показывает следующую фигуру
         {
             previewTetromino.transform.position = spawnPoint;
             nextTetromino = previewTetromino;
             nextTetromino.GetComponent<Tetromino>().enabled = true;
-
             previewTetromino = Instantiate(GetRandomTetromino(), previewPoint, Quaternion.identity, locationspawn);
             previewTetromino.GetComponent<Tetromino>().enabled = false;
-            
-
-            nextTetromino.Initialized(this);
+            nextTetromino.Initialize(this);
 
         }
     }
@@ -427,7 +393,7 @@ public class Game : MonoBehaviour
         gameOver = true;
         playersFinished++;
         GlobalScore.Instance.InsertPlayersFinished(playersFinished);
-        GlobalScore.Instance.InsertScore(currentScore, numLineCleared,playerNumber);
+        GlobalScore.Instance.InsertScore(currentScore, numLineCleared, playerNumber);
         this.enabled = false;
         FindObjectOfType<SceneSwap>().UpdateScene(gameOver);
     }

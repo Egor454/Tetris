@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LevelGenerate : MonoBehaviour
 {
     private GameObject singleplayer;
     private GameObject twoplayers;
+
     [SerializeField] private GameObject prefabGridFirstPlayer;
     [SerializeField] private GameObject prefabGridSecondPlayer;
     void Start()
