@@ -344,6 +344,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1306010564}
   m_CullTransparentMesh: 0
+--- !u!1 &1320156138 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6069374289960301988, guid: 0c98471c6dd4c5d4da28dc52aca19a4f,
+    type: 3}
+  m_PrefabInstance: {fileID: 6069374291075128655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1320156139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320156138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cee7be5cd2e4314b95e12cdea7b2c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabGridFirstPlayer: {fileID: 5205969464869374544, guid: 3bfa45dc534216d478bd27515b4f7f07,
+    type: 3}
+  prefabGridSecondPlayer: {fileID: 3979201811226900749, guid: 9a181ac13e7cb924ea085acbb7f93cca,
+    type: 3}
 --- !u!1 &1353720510
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,5 +532,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelGanerateScript
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6069374289960301986, guid: 0c98471c6dd4c5d4da28dc52aca19a4f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0c98471c6dd4c5d4da28dc52aca19a4f, type: 3}

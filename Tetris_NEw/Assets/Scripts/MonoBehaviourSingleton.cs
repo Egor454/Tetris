@@ -2,34 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//public class GlobalResultManager : MonoBehaviour
-//{
-
-//    public static GlobalResultManager instance = null;
-
-//    [SerializeField] private int scoreEnd;
-//    public int ScoreEnd => scoreEnd;
-
-//    [SerializeField] private float lineEnd;
-//    public float LineEnd => lineEnd;
-//    void Awake()
-//    {
-
-//        if (instance != null)
-//            Destroy(gameObject);
-//        instance = this;
-
- 
-//        DontDestroyOnLoad(gameObject);
-
-//    }
-//    public void InsertScore(int scoreend,float lineend)
-//    {
-//        scoreEnd = scoreend;
-//        lineEnd = lineend;
-//    }
-//}
-public class GlobalResultManager<T> : MonoBehaviour where T : MonoBehaviour
+public class MonoBehaviourSingleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     private static bool m_ShuttingDown = false;
     private static object m_Lock = new object();

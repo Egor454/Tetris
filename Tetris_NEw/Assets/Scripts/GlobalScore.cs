@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GlobalScore : GlobalResultManager<GlobalScore>
+public class GlobalScore : MonoBehaviourSingleton<GlobalScore>
 {
      private int scoreEnd;
     public int ScoreEnd=>scoreEnd;
@@ -10,22 +10,22 @@ public class GlobalScore : GlobalResultManager<GlobalScore>
      private int numberPlayers;
     public int NumberPlayers => numberPlayers;
 
-     private float lineEnd;
-    public float LineEnd=>lineEnd;
+     private int lineEnd;
+    public int LineEnd =>lineEnd;
 
-    private float lineEnd2;
-    public float LineEnd2 => lineEnd2;
+    private int lineEnd2;
+    public int LineEnd2 => lineEnd2;
 
     private int scoreEnd2;
     public int ScoreEnd2 => scoreEnd2;
 
-    private float playersFinished;
-    public float PlayersFinished => playersFinished;
+    private int playersFinished;
+    public int PlayersFinished => playersFinished;
 
-    private float playerNumbers;
-    public float PlayerNumbers => playerNumbers;
+    private int playerNumbers;
+    public int PlayerNumbers => playerNumbers;
 
-    public void InsertScore(int scoreend, float lineend, int playernumber)
+    public void InsertScore(int scoreend, int lineend, int playernumber)
     {
         if (playernumber == 1)
         {

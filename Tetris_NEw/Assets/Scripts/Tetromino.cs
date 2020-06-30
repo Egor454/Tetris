@@ -25,17 +25,6 @@ public class Tetromino : MonoBehaviour
     private  bool movedImmediateHorizontal = false;//движение по вертикали
     private bool movedImmediateVertical = false; //движения по горизонтали
 
-    // Start is called before the first frame update
-    void Start()
-    {
-         //fallSpeed = GameObject.Find("GameScript").GetComponent<Game>().FallSpeed;//получем и присваиваем занчение переменноq fallSpeed из класса Game 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void Initialized(Game game)
     {

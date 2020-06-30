@@ -13,14 +13,14 @@ public class MenuSystem : MonoBehaviour
     [SerializeField] private Text hud_linesend2;// поле вывода конечных заполненых линий на экран
 
     private int scoreEnd;
-    private float lineEnd;
+    private int lineEnd;
     private int playerOne;
     private int playerTwo;
     public void PlayAgain()//функция которая запускает игру занова
     {
         SceneManager.LoadScene("Level");
     }
-     void Update()//функция обновления
+     void Awake()//функция обновления
     {
         Endscore();
     }

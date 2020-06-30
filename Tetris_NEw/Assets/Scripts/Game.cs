@@ -55,8 +55,8 @@ public class Game : MonoBehaviour
     private float individualScoreTime;// таймер для бонусных очков
 
     private float currentLevel = 0;// уровень игры который меняет скорость падения фигур ,в зависимости от количества заполненных линий
-    [SerializeField] private float numLineCleared=0;// количество заполненных линий всего
-    public float NumLineCleared => numLineCleared;
+    [SerializeField] private int numLineCleared =0;// количество заполненных линий всего
+    public int NumLineCleared => numLineCleared;
 
     private Tetromino previewTetromino;// показывает следующую фигуру 
     private Tetromino nextTetromino;// фигура которая появляется для управления
@@ -364,8 +364,8 @@ public class Game : MonoBehaviour
             numLineCleared = 0;
             gameStarted = true;
 
-            previewTetromino = (Tetromino)Instantiate(GetRandomTetromino(), previewPoint, Quaternion.identity,locationspawn);
-            nextTetromino = (Tetromino)Instantiate(GetRandomTetromino(), spawnPoint, Quaternion.identity, locationspawn);
+            previewTetromino = Instantiate(GetRandomTetromino(), previewPoint, Quaternion.identity,locationspawn);
+            nextTetromino = Instantiate(GetRandomTetromino(), spawnPoint, Quaternion.identity, locationspawn);
             previewTetromino.GetComponent<Tetromino>().enabled = false;
             nextTetromino.Initialized(this);
             
@@ -376,7 +376,7 @@ public class Game : MonoBehaviour
             nextTetromino = previewTetromino;
             nextTetromino.GetComponent<Tetromino>().enabled = true;
 
-            previewTetromino = (Tetromino)Instantiate(GetRandomTetromino(), previewPoint, Quaternion.identity, locationspawn);
+            previewTetromino = Instantiate(GetRandomTetromino(), previewPoint, Quaternion.identity, locationspawn);
             previewTetromino.GetComponent<Tetromino>().enabled = false;
             
 
