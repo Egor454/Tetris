@@ -112,6 +112,7 @@ public class Tetromino : MonoBehaviour
         else
         {
             tetromino.transform.position += new Vector3(0, 1, 0);// отменяем перемещение
+            game.UpdateGrid(this);// обновляем поле
             game.DeleteRow();// проверяем заполнили ли поле
             if (game.CheckIsAboveGrid(this))// если выполнилось условие пройгрыша 
             {
@@ -145,11 +146,27 @@ public class Tetromino : MonoBehaviour
             {
                 tetromino.transform.Rotate(0, 0, 90);
             }
+            if (!CheckIsValidPosition())//проверяем столкновения с другими блками и фигурами 
+            {
+                tetromino.transform.position += new Vector3(1, 0, 0);
+                if (!CheckIsValidPosition())
+                {
+                    tetromino.transform.position += new Vector3(-1, 0, 0);
+                }
+            }
+            if (!CheckIsValidPosition())//проверяем столкновения с другими блками и фигурами 
+            {
+                tetromino.transform.position += new Vector3(-1, 0, 0);
+                if (!CheckIsValidPosition())
+                {
+                    tetromino.transform.position += new Vector3(-1, 0, 0);
+                }
+            }
             if (CheckIsValidPosition())//проверяем столкновения с другими блками и фигурами 
             {
                 game.UpdateGrid(this);//если все хорошо обновляем границу поля 
             }
-            else//  иначе возвращаем фигуры в исходное положение
+            else //  иначе возвращаем фигуры в исходное положение
             {
                 if (limitRotation)
                 {

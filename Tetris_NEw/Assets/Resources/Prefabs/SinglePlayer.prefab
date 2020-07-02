@@ -972,7 +972,7 @@ PrefabInstance:
     - target: {fileID: 930134312503557384, guid: 6883e5a3adfcc4c48bab27b9927c69a7,
         type: 3}
       propertyPath: rotateButton
-      value: 303
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 930134312503557384, guid: 6883e5a3adfcc4c48bab27b9927c69a7,
         type: 3}
@@ -1021,7 +1021,7 @@ PrefabInstance:
         type: 3}
       propertyPath: Tetromino_Long
       value: 
-      objectReference: {fileID: -8238794392049691543, guid: 26e719a90f47a6048ab54b6a29560126,
+      objectReference: {fileID: 5631641932226549145, guid: 26e719a90f47a6048ab54b6a29560126,
         type: 3}
     - target: {fileID: 930134312503557384, guid: 6883e5a3adfcc4c48bab27b9927c69a7,
         type: 3}

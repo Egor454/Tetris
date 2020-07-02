@@ -5,7 +5,7 @@ using UnityEngine;
 public class GlobalScore : MonoBehaviourSingleton<GlobalScore>
 {
     private int scoreEnd;
-    private int playerNumbers;
+    private int playerNumbers=0;
     private int numberPlayers;
     private int lineEnd;
     private int lineEnd2;
@@ -48,5 +48,6 @@ public class GlobalScore : MonoBehaviourSingleton<GlobalScore>
     public void Restrat()
     {
         playersFinished = 0;
+        playerNumbers = 0;
     }
 }

@@ -55,15 +55,16 @@ public class Game : MonoBehaviour
 
     void Start()// старт игры
     {
-        SpawnNextTetromino();
-        GlobalScore.Instance.Restrat();
-        playerNumber = 1;
-        GlobalScore.Instance.InsertPlayerNumber(playerNumber);
-        if (GlobalScore.Instance.PlayerNumbers == 1 && GlobalScore.Instance.NumberPlayers == 1)
+        if (GlobalScore.Instance.PlayerNumbers == 0 && GlobalScore.Instance.NumberPlayers == 1)
+        {
+            playerNumber = 1;
+            GlobalScore.Instance.InsertPlayerNumber(playerNumber);
+        }
+        else
         {
             playerNumber = 2;
         }
-
+        SpawnNextTetromino();
     }
 
     //Update is called once per frame
@@ -89,9 +90,9 @@ public class Game : MonoBehaviour
         {
             tetromino.CheckUserInput();
         }
-        if (Input.GetKey(rightButton))
+        if (Input.GetKey(downButton) || Time.time - fall >= fallSpeed)
         {
-            tetromino.RightMovement(nextTetromino);
+            tetromino.VerticalMovement(nextTetromino);
         }
         else if (Input.GetKey(leftButton))
         {
@@ -101,9 +102,9 @@ public class Game : MonoBehaviour
         {
             tetromino.Rotation(nextTetromino);
         }
-        else if (Input.GetKey(downButton) || Time.time - fall >= fallSpeed)
+        else if (Input.GetKey(rightButton))
         {
-            tetromino.VerticalMovement(nextTetromino);
+            tetromino.RightMovement(nextTetromino);
         }
     }
     void UpdateSpeedPlayer()//функция которая отлавливает нажатия игрока на + и -, и в зависимости от нажатой кнопки меняет скорость падения фигур вниз

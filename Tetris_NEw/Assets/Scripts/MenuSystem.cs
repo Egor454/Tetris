@@ -16,6 +16,7 @@ public class MenuSystem : MonoBehaviour
     public void PlayAgain()//функция которая запускает игру занова
     {
         SceneManager.LoadScene("Level");
+        GlobalScore.Instance.Restrat();
     }
     void Awake()//функция обновления
     {
