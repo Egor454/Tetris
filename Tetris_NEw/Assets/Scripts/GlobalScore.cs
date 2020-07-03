@@ -7,20 +7,20 @@ public class GlobalScore : MonoBehaviourSingleton<GlobalScore>
     private int scoreEnd;
     private int playerNumbers=0;
     private int numberPlayers;
-    private int lineEnd;
-    private int lineEnd2;
+    private float lineEnd;
+    private float lineEnd2;
     private int scoreEnd2;
     private int playersFinished;
 
     public int ScoreEnd => scoreEnd;
     public int NumberPlayers => numberPlayers;
-    public int LineEnd => lineEnd;
-    public int LineEnd2 => lineEnd2;
+    public float LineEnd => lineEnd;
+    public float LineEnd2 => lineEnd2;
     public int ScoreEnd2 => scoreEnd2;
     public int PlayersFinished => playersFinished;
     public int PlayerNumbers => playerNumbers;
 
-    public void InsertScore(int scoreend, int lineend, int playernumber)
+    public void InsertScore(int scoreend, float lineend, int playernumber)
     {
         if (playernumber == 1)
         {

@@ -161,6 +161,14 @@ public class Tetromino : MonoBehaviour
                 {
                     tetromino.transform.position += new Vector3(-1, 0, 0);
                 }
+                if (!CheckIsValidPosition())
+                {
+                    tetromino.transform.position += new Vector3(1, 0, 0);
+                    if (!CheckIsValidPosition())
+                    {
+                        tetromino.transform.position += new Vector3(1, 0, 0);
+                    }
+                }
             }
             if (CheckIsValidPosition())//проверяем столкновения с другими блками и фигурами 
             {

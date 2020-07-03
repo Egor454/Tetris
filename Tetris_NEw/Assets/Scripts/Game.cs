@@ -31,7 +31,7 @@ public class Game : MonoBehaviour
     [SerializeField] private int currentScore = 0;//очки игрока
     [SerializeField] private bool gameOver = false;
     [SerializeField] private int individualScore = 100;//бонусные очки которые начисляются  если быстро опустить фигуры вниз
-    [SerializeField] private int numLineCleared = 0;// количество заполненных линий всего
+    [SerializeField] private float numLineCleared = 0;// количество заполненных линий всего
 
     private int gridHeight = 20;//высота поля игры
     private Transform[,] grid;// обновленное поле игры,с учетом наличие на ней фигур 
@@ -51,18 +51,26 @@ public class Game : MonoBehaviour
     public float FallSpeed => fallSpeed;
     public int CurrentScore => currentScore;
     public bool Gameover => gameOver;
-    public int NumLineCleared => numLineCleared;
+    public float NumLineCleared => numLineCleared;
 
     void Start()// старт игры
     {
-        if (GlobalScore.Instance.PlayerNumbers == 0 && GlobalScore.Instance.NumberPlayers == 1)
+        if ( GlobalScore.Instance.NumberPlayers == 0)
         {
             playerNumber = 1;
-            GlobalScore.Instance.InsertPlayerNumber(playerNumber);
         }
         else
         {
-            playerNumber = 2;
+            if(GlobalScore.Instance.NumberPlayers == 1 && GlobalScore.Instance.PlayerNumbers==0)
+            {
+                playerNumber = 1;
+                GlobalScore.Instance.InsertPlayerNumber(playerNumber);
+            }
+            else
+            {
+                playerNumber = 2;
+            }
+
         }
         SpawnNextTetromino();
     }
