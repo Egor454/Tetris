@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 246880917358475914, guid: 8169a1705ed8ec44abbe3b84b0de4386,
+        type: 3}
+      propertyPath: m_Name
+      value: Player2
+      objectReference: {fileID: 0}
     - target: {fileID: 253407555601082300, guid: 8169a1705ed8ec44abbe3b84b0de4386,
         type: 3}
       propertyPath: m_Sprite
@@ -291,6 +296,11 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 0.627451
       objectReference: {fileID: 0}
+    - target: {fileID: 1775454289099249663, guid: 8169a1705ed8ec44abbe3b84b0de4386,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1939893524279451032, guid: 8169a1705ed8ec44abbe3b84b0de4386,
         type: 3}
       propertyPath: m_Sprite
@@ -322,6 +332,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.b
       value: 0.627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 2232515269442922333, guid: 8169a1705ed8ec44abbe3b84b0de4386,
+        type: 3}
+      propertyPath: m_Name
+      value: Player2
       objectReference: {fileID: 0}
     - target: {fileID: 2451070679849782507, guid: 8169a1705ed8ec44abbe3b84b0de4386,
         type: 3}
@@ -450,6 +465,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.b
       value: 0.627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 3914625618415634184, guid: 8169a1705ed8ec44abbe3b84b0de4386,
+        type: 3}
+      propertyPath: m_Text
+      value: Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3914625618415634184, guid: 8169a1705ed8ec44abbe3b84b0de4386,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.99607843
+      objectReference: {fileID: 0}
+    - target: {fileID: 3914625618415634184, guid: 8169a1705ed8ec44abbe3b84b0de4386,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4228870386433700341, guid: 8169a1705ed8ec44abbe3b84b0de4386,
         type: 3}
@@ -632,6 +662,26 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 0.627451
       objectReference: {fileID: 0}
+    - target: {fileID: 5958163375005243392, guid: 8169a1705ed8ec44abbe3b84b0de4386,
+        type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.90310204
+      objectReference: {fileID: 0}
+    - target: {fileID: 5958163375005243392, guid: 8169a1705ed8ec44abbe3b84b0de4386,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278249215
+      objectReference: {fileID: 0}
+    - target: {fileID: 5958163375005243392, guid: 8169a1705ed8ec44abbe3b84b0de4386,
+        type: 3}
+      propertyPath: m_text
+      value: Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5958163375005243392, guid: 8169a1705ed8ec44abbe3b84b0de4386,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5985894306212039125, guid: 8169a1705ed8ec44abbe3b84b0de4386,
         type: 3}
       propertyPath: m_Sprite
@@ -696,6 +746,11 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 0.627451
       objectReference: {fileID: 0}
+    - target: {fileID: 6228780483799626549, guid: 8169a1705ed8ec44abbe3b84b0de4386,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6232002944532021720, guid: 8169a1705ed8ec44abbe3b84b0de4386,
         type: 3}
       propertyPath: m_Sprite
@@ -759,6 +814,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.b
       value: 0.627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 7070544357600019276, guid: 8169a1705ed8ec44abbe3b84b0de4386,
+        type: 3}
+      propertyPath: m_text
+      value: Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7070544357600019276, guid: 8169a1705ed8ec44abbe3b84b0de4386,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7165835480908663618, guid: 8169a1705ed8ec44abbe3b84b0de4386,
         type: 3}
