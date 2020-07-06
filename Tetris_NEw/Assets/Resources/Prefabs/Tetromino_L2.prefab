@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowRotation: 1
   limitRotation: 0
-  continuousVerticalSpeed: 0.05
+  continuousVerticalSpeed: 0.1
   continuousHorizontalSpeed: 0.1
   buttonDownWaitMax: 0.2
 --- !u!1 &7561047600085621966

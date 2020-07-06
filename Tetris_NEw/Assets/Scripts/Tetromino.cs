@@ -4,7 +4,7 @@ public class Tetromino : MonoBehaviour
 {
     [SerializeField] private bool allowRotation = true;// переменная которая позволяет вращать фигуру 
     [SerializeField] private bool limitRotation = false;//переменная для ограничения вращения фигуры,для некторых фигур ограниченно вращение 90 и -90
-    [SerializeField] private float continuousVerticalSpeed = 0.05f;//скорость фигуры если нажать и удерживать кнопку вниз
+    private float continuousVerticalSpeed = 0.07f;//скорость фигуры если нажать и удерживать кнопку вниз
     [SerializeField] private float continuousHorizontalSpeed = 0.1f;//скорость фигуры если нажать и удерживать кнопку влево или вправо
     [SerializeField] private float buttonDownWaitMax = 0.2f;// через какой промежуток времени игра зарегистрирует залипании клавиши 
 
@@ -97,6 +97,10 @@ public class Tetromino : MonoBehaviour
             {
                 verticalTimer += Time.deltaTime;
                 return;
+            }
+            if (continuousVerticalSpeed > 0.03f)
+            {
+                continuousVerticalSpeed = continuousVerticalSpeed - 0.01f;
             }
         }
         if (!movedImmediateVertical)

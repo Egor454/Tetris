@@ -41,6 +41,7 @@ public class MenuSystem : MonoBehaviour
     public void BackMenu()
     {
         SceneManager.LoadScene("Menu");
+        GlobalScore.Instance.Restrat();
     }
 }
 

@@ -209,11 +209,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b32555bdeb594342b2f4b0135e2f7fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallSpeed: 1
   allowRotation: 1
   limitRotation: 1
-  prefabName: 
-  individualScore: 100
+  continuousVerticalSpeed: 0.05
+  continuousHorizontalSpeed: 0.1
+  buttonDownWaitMax: 0.2
 --- !u!1 &6039858948224006499
 GameObject:
   m_ObjectHideFlags: 0

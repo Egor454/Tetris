@@ -102,13 +102,13 @@ public class Game : MonoBehaviour
         {
             tetromino.VerticalMovement(nextTetromino);
         }
-        else if (Input.GetKey(leftButton))
-        {
-            tetromino.LeftMovement(nextTetromino);
-        }
         else if (Input.GetKeyDown(rotateButton))
         {
             tetromino.Rotation(nextTetromino);
+        }
+        else if (Input.GetKey(leftButton))
+        {
+            tetromino.LeftMovement(nextTetromino);
         }
         else if (Input.GetKey(rightButton))
         {
@@ -119,7 +119,7 @@ public class Game : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.KeypadPlus))
         {
-            if (fallSpeed >= 0)
+            if (fallSpeed >= 0.1f)
             {
                 fallSpeed = fallSpeed - 0.1f;
             }
@@ -140,9 +140,9 @@ public class Game : MonoBehaviour
     }
     void UpdateSpeed()//функция меняет скорость падения фигур вниз в зависимости от уровня
     {
-        if (fallSpeed >= 0)
+        if (fallSpeed >= 0.1)
         {
-            fallSpeed = fallSpeed - (currentLevel * 0.4f);
+            fallSpeed = fallSpeed - (currentLevel * 0.2f);
             Debug.Log("Current Fall Speed:" + fallSpeed);
         }
     }
