@@ -91,6 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5726683927030904031}
   - component: {fileID: 2925224539455305258}
+  - component: {fileID: -461095297251938873}
   m_Layer: 0
   m_Name: Tetromino_Square2
   m_TagString: Untagged
@@ -130,9 +131,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowRotation: 0
   limitRotation: 0
-  continuousVerticalSpeed: 0.05
   continuousHorizontalSpeed: 0.1
   buttonDownWaitMax: 0.2
+--- !u!114 &-461095297251938873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3178149730520222804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a9e0bede1f66a847969138038de6053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3588783308801648114
 GameObject:
   m_ObjectHideFlags: 0

@@ -42,6 +42,7 @@ public class Game : MonoBehaviour
     private Tetromino previewTetromino;// показывает следующую фигуру 
     private Tetromino nextTetromino;// фигура которая появляется для управления
     private Tetromino tetromino;
+    private Tetromino ghostTetromino;
     private int playersFinished = 0;
     private int playerNumber;
     private bool gameStarted = false;// началась игра или нет
@@ -345,8 +346,12 @@ public class Game : MonoBehaviour
             previewTetromino = Instantiate(GetRandomTetromino(), previewPoint, Quaternion.identity, locationspawn);
             nextTetromino = Instantiate(GetRandomTetromino(), spawnPoint, Quaternion.identity, locationspawn);
             previewTetromino.GetComponent<Tetromino>().enabled = false;
+            previewTetromino.GetComponent<GhostTetromino>().enabled = false;
+            nextTetromino.GetComponent<GhostTetromino>().enabled = false;
+            nextTetromino.tag = "ActiveTetromino";
+            GlobalScore.Instance.Global(this, nextTetromino);
             nextTetromino.Initialize(this);
-
+            SpawnGhostTetromino();
         }
         else//если игра уже идет, следующую фигуру перемещает под управление игрока и показывает следующую фигуру
         {
@@ -355,9 +360,22 @@ public class Game : MonoBehaviour
             nextTetromino.GetComponent<Tetromino>().enabled = true;
             previewTetromino = Instantiate(GetRandomTetromino(), previewPoint, Quaternion.identity, locationspawn);
             previewTetromino.GetComponent<Tetromino>().enabled = false;
+            previewTetromino.GetComponent<GhostTetromino>().enabled = false;
+            nextTetromino.GetComponent<GhostTetromino>().enabled = false;
+            nextTetromino.tag = "ActiveTetromino";
+            GlobalScore.Instance.Global(this, nextTetromino);
             nextTetromino.Initialize(this);
-
+            SpawnGhostTetromino();
         }
+    }
+    public void SpawnGhostTetromino()
+    {
+        if (GameObject.FindGameObjectWithTag("GhostTetromino") != null)
+            Destroy(GameObject.FindGameObjectWithTag("GhostTetromino"));
+        ghostTetromino = Instantiate(nextTetromino, nextTetromino.transform.position, Quaternion.identity, locationspawn);
+        Destroy(ghostTetromino.GetComponent<Tetromino>());
+        ghostTetromino.GetComponent<GhostTetromino>().enabled = true;
+
     }
     public bool CheckIsInsideGrid(Vector2 pos)// проверка столкновений с полем
     {

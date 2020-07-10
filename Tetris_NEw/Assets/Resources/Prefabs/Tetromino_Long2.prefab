@@ -91,6 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3851469646679306176}
   - component: {fileID: -3015195857269242069}
+  - component: {fileID: -5159407352118814231}
   m_Layer: 0
   m_Name: Tetromino_Long2
   m_TagString: Untagged
@@ -130,9 +131,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowRotation: 1
   limitRotation: 1
-  continuousVerticalSpeed: 0.05
   continuousHorizontalSpeed: 0.1
   buttonDownWaitMax: 0.2
+--- !u!114 &-5159407352118814231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4787578941530424776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a9e0bede1f66a847969138038de6053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6248326174320003205
 GameObject:
   m_ObjectHideFlags: 0

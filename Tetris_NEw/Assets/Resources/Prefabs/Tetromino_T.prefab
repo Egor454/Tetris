@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6310043893571785161}
   - component: {fileID: -668304280166703304}
+  - component: {fileID: 3806610546126720473}
   m_Layer: 0
   m_Name: Tetromino_T
   m_TagString: Untagged
@@ -49,9 +50,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowRotation: 1
   limitRotation: 0
-  continuousVerticalSpeed: 0.05
   continuousHorizontalSpeed: 0.1
   buttonDownWaitMax: 0.2
+--- !u!114 &3806610546126720473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3503404768214506121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a9e0bede1f66a847969138038de6053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6457022197223047234
 GameObject:
   m_ObjectHideFlags: 0
