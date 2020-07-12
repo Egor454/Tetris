@@ -16,8 +16,12 @@ public class Tetromino : MonoBehaviour
     private Game game;
     private bool movedImmediateHorizontal = false;//движение по вертикали
     private bool movedImmediateVertical = false; //движения по горизонтали
-
-
+    GhostTetromino ghostTetromino;
+    public void InitializeGostTetromino(Game game,Tetromino tetro)
+    {
+        ghostTetromino = gameObject.GetComponent<GhostTetromino>();
+        ghostTetromino.InitializeGhost(game, tetro);
+    }
     public void Initialize(Game game)
     {
         this.game = game;

@@ -53,6 +53,7 @@ public class Game : MonoBehaviour
     public int CurrentScore => currentScore;
     public bool Gameover => gameOver;
     public float NumLineCleared => numLineCleared;
+    public int PlayerNumber => playerNumber;
 
     void Start()// старт игры
     {
@@ -348,7 +349,6 @@ public class Game : MonoBehaviour
             previewTetromino.GetComponent<Tetromino>().enabled = false;
             previewTetromino.GetComponent<GhostTetromino>().enabled = false;
             nextTetromino.GetComponent<GhostTetromino>().enabled = false;
-            nextTetromino.tag = "ActiveTetromino";
             GlobalScore.Instance.Global(this, nextTetromino);
             nextTetromino.Initialize(this);
             SpawnGhostTetromino();
@@ -362,7 +362,6 @@ public class Game : MonoBehaviour
             previewTetromino.GetComponent<Tetromino>().enabled = false;
             previewTetromino.GetComponent<GhostTetromino>().enabled = false;
             nextTetromino.GetComponent<GhostTetromino>().enabled = false;
-            nextTetromino.tag = "ActiveTetromino";
             GlobalScore.Instance.Global(this, nextTetromino);
             nextTetromino.Initialize(this);
             SpawnGhostTetromino();
@@ -370,9 +369,16 @@ public class Game : MonoBehaviour
     }
     public void SpawnGhostTetromino()
     {
-        if (GameObject.FindGameObjectWithTag("GhostTetromino") != null)
-            Destroy(GameObject.FindGameObjectWithTag("GhostTetromino"));
+        if (GameObject.FindGameObjectWithTag("GhostTetromino1Player") != null&& playerNumber == 1)
+        {
+            Destroy(GameObject.FindGameObjectWithTag("GhostTetromino1Player"));
+        }
+        if(GameObject.FindGameObjectWithTag("GhostTetromino2Player") != null && playerNumber == 2)
+        {
+            Destroy(GameObject.FindGameObjectWithTag("GhostTetromino2Player"));
+        }
         ghostTetromino = Instantiate(nextTetromino, nextTetromino.transform.position, Quaternion.identity, locationspawn);
+        ghostTetromino.InitializeGostTetromino(this, nextTetromino);
         Destroy(ghostTetromino.GetComponent<Tetromino>());
         ghostTetromino.GetComponent<GhostTetromino>().enabled = true;
 

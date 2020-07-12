@@ -8,17 +8,23 @@ public class GhostTetromino : MonoBehaviour
     private Transform followTetrominoTransform;
     void Start()
     {
-        tag = "GhostTetromino";
         foreach (Transform mino in transform)
         {
             mino.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .5f);
         }
-        InitializeGhost();
     }
-    public void InitializeGhost()
+    public void InitializeGhost(Game game,Tetromino tetro)
     {
-        this.game = GlobalScore.Instance.Games;
-        followTetrominoTransform = GlobalScore.Instance.Tettrominos.transform;
+        this.game = game;
+        followTetrominoTransform = tetro.transform;
+        if (game.PlayerNumber == 1)
+        {
+            tag = "GhostTetromino1Player";
+        }
+        if (game.PlayerNumber == 2)
+        {
+            tag = "GhostTetromino2Player";
+        }
     }
 
     void Update()

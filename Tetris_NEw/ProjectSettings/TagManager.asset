@@ -7,6 +7,8 @@ TagManager:
   - GlobalFields
   - GhostTetromino
   - ActiveTetromino
+  - GhostTetromino1Player
+  - GhostTetromino2Player
   layers:
   - Default
   - TransparentFX
